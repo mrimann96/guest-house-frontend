@@ -1,3 +1,4 @@
+
 .container {
     display: flex;
     justify-content: center;
@@ -13,10 +14,12 @@
     box-shadow:2px 2px 2px 2px rgb(128, 125, 125);
   }
   
-  .reg-rightside{
-    overflow-y: scroll;
-    max-height: 80vh;
+  @media only screen and(max-width:1024px){
+    .centered-box{
+      width:50%;
+    }
   }
+  
 
 
 .Parent {
@@ -26,8 +29,8 @@
 }
 
 .leftSide {
-    background-color: rgb(51, 40, 209);
-    border: 2px solid rgb(12, 12, 12);
+    background-color: #0275d8;
+    /* border: 2px solid rgb(12, 12, 12); */
     border-radius: 25px 100px 25px 100px;
     
 }
@@ -37,33 +40,29 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    height: 100%; /* Fill the height of the LeftSide */
+    height: 100%; 
     padding: 20px;
   }
   
   .LeftImage {
-    max-width: 100%; /* Ensures the image is responsive */
+    max-width: 100%; 
     height: auto;
   }
   
   .lheading {
-    font-size: 24px; /* Adjust font size for responsiveness */
+    font-size: 24px; 
     color: rgb(245, 247, 248);
     margin-top: 20px;
     text-align: center;
   }
   
-/* .rightSide {
-    
-} */
-/* Default styles */
 .reference-heading {
     font-size: 24px;
     text-align:center;
   }
   
-  /* Responsive text sizing for smaller screens */
-  @media (max-width: 768px) {
+  
+  @media only screen and(max-width: 768px) {
     .rheading {
       font-size: 20px;
     }
@@ -93,7 +92,7 @@
     margin-top: 4rem;
 }
 
-/* Media queries for responsiveness */
+
 @media screen and (max-width: 768px) {
     .Parent {
         padding: 10px;
@@ -124,8 +123,12 @@
     }
 }
 
-/* Adjust the font size for the heading and label */
+
 .govt-id-heading,
 .file-input-label {
   font-size: 18px;
+}
+
+.register-btn{
+  margin-top:20px;
 }
