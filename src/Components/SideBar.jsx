@@ -5,7 +5,7 @@ const  SideBar = ({user}) => {
   return (
     
     <div className="tables-container">
-      hello world 
+      hello world hi
         <img src={Image}/>
         <hr style = {{border : '1px rgb(44, 42, 42) dotted'}}/>
       <table className="table">
