@@ -1,9 +1,19 @@
 import { useState } from 'react';
 import '../../style/facultyalumni.css'
 import '../../style/MainContainer.css'
+import Popup from '../Popup/Popup';
+import '../main.css';
 export default function AlumniRight({prop}) {
   const {reffirstName,reflastName, refphoneNumber,batch,branch,jobProfile, setReffirstName, setReflastName, setRefphoneNumber, setBatch, setBranch, setJobProfile } = prop;
+  const [isPopupOpen, setPopupOpen] = useState(false);
 
+  const openPopup = () => {
+    setPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
   
 
   // Event handler to update the state when input values change
@@ -97,11 +107,12 @@ export default function AlumniRight({prop}) {
           </div>
         </div>
         <div className="mt-auto justify-content-end d-flex">
-          <button type="submit" className="btn btn-primary btn-lg rounded register-btn">
+          <button type="submit" className="btn btn-primary btn-lg rounded register-btn" onClick={openPopup}>
             Register
           </button>
         </div>
       {/* </form> */}
+      <Popup isOpen={isPopupOpen} onClose={closePopup} />
     </div>
   );
 }

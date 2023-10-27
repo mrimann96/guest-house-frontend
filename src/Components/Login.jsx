@@ -2,11 +2,17 @@ import React, { useState } from 'react'
 import "../style/loginbox.css"
 import Logo from "../images/logo_250.png.png"
 import "../style/auth.css"
-import { NavLink } from 'react-router-dom'
+import { NavLink, useFetcher } from 'react-router-dom'
+import userDetail from './UserDetail'
+import Dash from './Dash'
 
 const Login = () => {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [loginData, setLoginData] = useState(null);
+  const [isLogged, setIsLogged] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const [data, setData] = useState([]);
   const setSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +27,21 @@ const Login = () => {
         "Content-Type": "application/json",
       }
    }).then((res) => res.json())
-   .then((data) => console.log(data))
+   .then((data) => {
+    console.log(data);
+
+    setLoginData(data);
+    if(data.id !== null) {
+         setIsLogged(true);
+    }
+    if(data.isAdmin) {
+        setIsAdmin(true);
+    }
+
+    window.alert(data.message);
+
+   }
+   )
    .catch((err) => console.log(err));
 
 
@@ -29,7 +49,8 @@ const Login = () => {
   }
   return (
     <>
-    
+    {
+      !isLogged ? 
     <div className="login-box">
     <div className="login-logo">
             <img src={Logo} alt="NIT logo"  />
@@ -76,7 +97,9 @@ const Login = () => {
                     </div>
                 </div>
         </div>
-    </div>
+    </div>  : isAdmin ? <Dash admin={loginData.id} /> : <userDetail userId={loginData.id} />
+      
+}
     
     </>
   )

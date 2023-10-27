@@ -1,8 +1,21 @@
 import { useState } from 'react';
-import '../../style/facultyalumni.css'
+import '../../style/facultyalumni.css';
+
+import Popup from '../Popup/Popup';
+import '../main.css';
+
+ 
 export default function StudentRight({prop}) {
   const { reffirstName,reflastName, refphoneNumber,studbranch,studrollNumber,setReffirstName, setReflastName, setRefphoneNumber, setSbranch, setSrollNumber } = prop;
+  const [isPopupOpen, setPopupOpen] = useState(false);
 
+  const openPopup = () => {
+    setPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setPopupOpen(false);
+  };
   // Define state variables to store the input values
 
 
@@ -83,11 +96,12 @@ export default function StudentRight({prop}) {
         </div>
 
         <div className="mt-auto justify-content-end d-flex">
-          <button type="submit" className="btn btn-primary btn-lg rounded register-btn">
+          <button type="submit" className="btn btn-primary btn-lg rounded register-btn" onClick={openPopup}>
             Register
           </button>
         </div>
       {/* </form> */}
+      <Popup isOpen={isPopupOpen} onClose={closePopup} />
     </div>
-  );
+  )
 }

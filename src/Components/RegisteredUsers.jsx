@@ -1,9 +1,11 @@
 
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 
 export default function RegisteredUsers() {
-  const [users, setUsers] = useState([]);
+
+
+  const [users, setUsers] = useState(null);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('');
   const [newUser, setNewUser] = useState({
@@ -16,10 +18,20 @@ export default function RegisteredUsers() {
     setSelectedUserId(userId);
   };
 
+
+  useEffect(()=> {
+      fetch("http://localhost:4000/users/approved/registered")  
+      .then((res) => res.json()) 
+    .then((data) => {setUsers(data); console.log(data)})
+    .catch((err) => console.error(err));
+  }, []);
+
   const addNewUser = () => {
     setUsers([...users, newUser]);
     setNewUser({ name: '', contactNumber: '', email: '' });
   };
+
+
 
   return (
     <div className='container my-5'>
@@ -61,14 +73,14 @@ export default function RegisteredUsers() {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, index) => (
-                <tr key={user.id}>
+              {users && users.length>0 && users.map((user, index) => (
+                <tr key={user._id}>
                   <td>{index + 1}</td>
-                  <td>{user.name}</td>
-                  <td>{user.contactNumber}</td>
-                  <td>{user.email}</td>
+                  <td>{user.user.name}</td>
+                  <td>{user.user.phone}</td>
+                  <td>{user.user.email}</td>
                   <td>
-                    <button className={"rounded-2 border-primary mx-3"} style={{ backgroundColor: '#0275d8', color: 'white' }} onClick={() => viewUserProfile(user.id)}>
+                    <button className={"rounded-2 border-primary mx-3"} style={{ backgroundColor: '#0275d8', color: 'white' }} onClick={() => viewUserProfile(user.user._id)}>
                       View Profile
                     </button>
                   </td>
