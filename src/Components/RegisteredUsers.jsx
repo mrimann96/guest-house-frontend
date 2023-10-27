@@ -5,7 +5,7 @@ import React, { useState,useEffect } from 'react';
 export default function RegisteredUsers() {
 
 
-  const [users, setUsers] = useState(null);
+  const [users, setUsers] = useState([]);
   const [search, setSearch] = useState('');
   const [filter, setFilter] = useState('');
   const [newUser, setNewUser] = useState({
@@ -22,7 +22,7 @@ export default function RegisteredUsers() {
   useEffect(()=> {
       fetch("http://localhost:4000/users/approved/registered")  
       .then((res) => res.json()) 
-    .then((data) => {setUsers(data); console.log(data)})
+    .then((data) => {setUsers(data);console.log(data)})
     .catch((err) => console.error(err));
   }, []);
 
